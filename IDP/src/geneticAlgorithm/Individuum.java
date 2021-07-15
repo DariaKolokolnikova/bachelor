@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Individuum{
     ArrayList<Integer> route = new ArrayList<>();
-	protected double fitness = 0;
+	public  double fitness = 0;
 	
     public ArrayList<Integer> getRoute() {
 		return route;
