@@ -17,10 +17,7 @@ import java.io.IOException;
 
 public class copy {
 
-//	 ArrayList<String> gfg = new ArrayList<String>(
-//	            Arrays.asList("Geeks",
-//	                          "for",
-//	                          "Geeks"));
+
 	static int counter = 0;
 
 	static public ArrayList<Integer> route = new ArrayList<Integer>(
@@ -33,7 +30,7 @@ public class copy {
 	public static ArrayList<Individuum> KID = new ArrayList<Individuum>();
 	public static ArrayList<Individuum> PAR = new ArrayList<Individuum>();
 	public static POP POPobj =new POP();
-	static int popSize = 6;
+	static int popSize = 4;
 	static String path = "/IDP/src/geneticAlgorithm/locations.csv";
 	static String line = "";
 //     static List<Double> POPdistancesUnsorted= new ArrayList<Double>();
@@ -64,7 +61,7 @@ public static int rankFitness=0;
 //        }
 
 		locationCount = 400;
-		runs = 1000;
+		runs = 2;
 //		for (int i = 0; i < 5; i++) {
 //			locations.add(new Punkt(i+1,i+1));
 //		}
@@ -125,6 +122,7 @@ public static int rankFitness=0;
 			for (Individuum I : POP) {
 				System.out.println("POPULATION" + I.getFitness());
 			}
+			POPobj.setPOP(POP);
 		}
 
 	}
@@ -253,12 +251,11 @@ public static int rankFitness=0;
 //	}
 
 	public static void rankSelektion() {
-		POP.clear();
-		POP.addAll(POPobj.getPOP());
-		
-		POP = sortArray(POP);
-		Collections.reverse(POP);
-        POPobj.setPOP(POP);
+		for(Individuum individuum: POP) {
+			System.out.println("vor sortiert "+individuum.getFitness());
+		}
+//		POPobj.setFitness();
+
         POPobj.setRanks();
 		System.out.println("sortiert" + POPobj.getPOP());
 
@@ -295,27 +292,25 @@ public static int rankFitness=0;
 		return newParents;
 	}
 
-	public static ArrayList<Individuum> selektionElitaer(ArrayList<Individuum> parentsList,
-			ArrayList<Individuum> childrenList) {
-		ArrayList<Individuum> indiListe = new ArrayList<>(); // Verwende eine Liste um Parents und Children zusammen zu
-																// werfen
-		if (parentsList != null) {
-			indiListe.addAll(parentsList);
-		}
-		if (childrenList != null) {
-			indiListe.addAll(childrenList);
-		}
+	public static void selektionElitaer() {
+	ArrayList<Individuum> indiListe = new ArrayList<>(); // Verwende eine Liste um Parents und Children zusammen zu
+//																// werfen
+//		if (parentsList != null) {
+//			indiListe.addAll(parentsList);
+//		}
+//		if (childrenList != null) {
+//			indiListe.addAll(childrenList);
+//		}
 		// Wähle Anzahl Eltern beste Individuen aus und gib sie zurück als Array
 		// Liste.
 
-		indiListe = sortArray(indiListe);
-
-		indiListe = new ArrayList<Individuum>(indiListe.subList(0, popSize));
+		POPobj.sortArray();
+          
+		indiListe = new ArrayList<Individuum>(POPobj.getPOP().subList(0, popSize));
 		for (Individuum d : indiListe) {
 			System.out.println("SORTIERT:" + d.getFitness());
 		}
-		return indiListe;
-	}
+POPobj.setPOP(indiListe);	}
 
 	public static ArrayList<Individuum> sortArray(ArrayList<Individuum> listToSort) {
 		Individuum smaller;
@@ -346,7 +341,7 @@ public static int rankFitness=0;
 		if (cut == 0) {
 			cut = 1;
 		} // damit schnittstelle nich zuweit links
-		System.out.println("CUT:" + cut);
+		//System.out.println("CUT:" + cut);
 		List<Integer> usedLocationPoints = new ArrayList<Integer>();
 		int zeroCount = 0;
 		ArrayList<Integer> newA = new ArrayList<Integer>();
@@ -453,10 +448,7 @@ public static int rankFitness=0;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		for (Punkt punkt : locations) {
-//			System.out.println(punkt.x +" "+ punkt.y);
-//			
-//		}
+
 		return locations;
 	}
 

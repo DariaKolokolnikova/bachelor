@@ -1,6 +1,7 @@
 package geneticAlgorithm;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class POP {
@@ -12,6 +13,9 @@ public class POP {
 	}
 
 	public void setRanks() {
+		sortArray();
+		Collections.reverse(POP);
+
 		for (int i = 0; i < POP.size(); i++) {
 			POP.get(i).setFitness(i+1);
 		}
@@ -27,6 +31,23 @@ public class POP {
 			a = new Individuum();
 			a.generaterRandomRoute(students);
 			POP.add(a);
+		}
+	}
+	public void sortArray() {
+		Individuum smaller;
+		Individuum bigger;
+		boolean run = true;
+		for (int i = 0; i < POP.size() && run == true; i++) {
+			run = false;
+			for (int y = 0; y < POP.size() - 1; y++) {
+				if (POP.get(y).getFitness() > POP.get(y + 1).getFitness()) {
+					bigger = POP.get(y);
+					smaller = POP.get(y + 1);
+					POP.set(y, smaller);
+					POP.set(y + 1, bigger);
+					run = true;
+				}
+			}
 		}
 	}
 	public  ArrayList<Punkt> getLocations() {
