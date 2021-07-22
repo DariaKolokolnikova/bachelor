@@ -3,10 +3,12 @@ package geneticAlgorithm;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+     
 
-public class Individuum{
-    ArrayList<Integer> route = new ArrayList<>();
-	public  double fitness = 0;
+public class Individuum{  
+	public  ArrayList<Integer> route;
+
+	public double fitness = 0;
 	
     public ArrayList<Integer> getRoute() {
 		return route;
@@ -26,13 +28,10 @@ public class Individuum{
 
 	public void generaterRandomRoute(int students) {
 		ArrayList<Integer> list = new ArrayList<Integer>(Collections.nCopies(students*4, 0));
-
 		for (int i = 0; i < students; i++) {
 			list.set(i, i+1);
 		}
 		Collections.shuffle(list);
-		System.out.println("listeINDIVIDUUM"+list);
 		this.route=list;
 	}
-	//hierhin calculatefitnessmethode verlagern und hier auch locations haben
 }

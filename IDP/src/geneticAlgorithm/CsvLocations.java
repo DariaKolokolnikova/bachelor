@@ -5,7 +5,6 @@ package geneticAlgorithm;
 import java.util.ArrayList;
 import java.util.List;
  public class CsvLocations {
-     public static List<Punkt> locations= new ArrayList<Punkt>();
 
  public static void main(String[] args) {
 
@@ -15,8 +14,6 @@ import java.util.List;
    for (int i = 0; i < 10000; i++) {
 	double x= Math.random()*15;
 	double y= Math.random()*15;
-	//new Punkt(x, y);
-	System.out.println(String.valueOf(x)+ String.valueOf(y));
 	sb.append(String.valueOf(x));
 	sb.append(",");
 	sb.append(String.valueOf(y));
@@ -26,7 +23,7 @@ import java.util.List;
   pw.write(sb.toString());
   pw.close();
    } catch (Exception e) {
-      // TODO: handle exception
+	   System.out.println(e.getMessage().toString());
    }
 }
 }
